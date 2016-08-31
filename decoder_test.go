@@ -342,6 +342,28 @@ func TestDecode_interface(t *testing.T) {
 				},
 			},
 		},
+
+		{
+			"missing_defaults.json",
+			false,
+			map[string]interface {}{
+				"module": []map[string]interface {}{
+					map[string]interface{}{
+						"a": []map[string]interface{}{
+							map[string]interface{}{
+								"source":"./a/",
+								"foo":"${element(split(\",\", var.hosts), 0)}",
+							},
+						},
+					},
+				},
+				"variable": []map[string]interface{}{
+					map[string]interface{}{
+						"hosts":"web1.example.com,web2.example.com",
+					},
+				},
+			},
+		},
 	}
 
 	for _, tc := range cases {

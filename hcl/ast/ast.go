@@ -55,6 +55,11 @@ func (o *ObjectList) Add(item *ObjectItem) {
 func (o *ObjectList) Filter(keys ...string) *ObjectList {
 	var result ObjectList
 	for _, item := range o.Items {
+		// If we have nothing to match on, then ignore
+		if item == nil || keys == nil {
+			continue
+		}
+
 		// If there aren't enough keys, then ignore this
 		if len(item.Keys) < len(keys) {
 			continue
